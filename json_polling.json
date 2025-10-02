@@ -1,0 +1,637 @@
+{
+  "info": {
+    "name": "Polling System API",
+    "description": "Complete API collection for Nest.js Polling System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "adminToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "pollId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "🏠 Authentication",
+      "item": [
+        {
+          "name": "Register Admin User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"admin\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "register"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register Regular User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "register"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login as Admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login as User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "profile"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "logout"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "👥 Users Management (Admin Only)",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["users"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "profile"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User Profile",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"newemail@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "profile"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Statistics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/stats/count",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "stats", "count"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📊 Polls Management",
+      "item": [
+        {
+          "name": "Create Public Poll (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Favorite Programming Language\",\n  \"options\": [\"JavaScript\", \"Python\", \"Java\", \"C#\"],\n  \"visibility\": \"public\",\n  \"durationHours\": 1.5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/polls",
+              "host": ["{{baseUrl}}"],
+              "path": ["polls"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Private Poll (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Team Meeting Time\",\n  \"options\": [\"9:00 AM\", \"10:00 AM\", \"2:00 PM\", \"4:00 PM\"],\n  \"visibility\": \"private\",\n  \"durationHours\": 2,\n  \"allowedUserEmails\": [\"user@example.com\"]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/polls",
+              "host": ["{{baseUrl}}"],
+              "path": ["polls"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Polls",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/polls",
+              "host": ["{{baseUrl}}"],
+              "path": ["polls"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Polls (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/polls/my-polls",
+              "host": ["{{baseUrl}}"],
+              "path": ["polls", "my-polls"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Active Polls",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/polls/active",
+              "host": ["{{baseUrl}}"],
+              "path": ["polls", "active"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Poll by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/polls/{{pollId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["polls", "{{pollId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Poll (Admin)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Poll Title\",\n  \"durationHours\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/polls/{{pollId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["polls", "{{pollId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Poll (Admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/polls/{{pollId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["polls", "{{pollId}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Poll Statistics (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/polls/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["polls", "stats"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🗳️ Voting System",
+      "item": [
+        {
+          "name": "Cast Vote",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"selectedOption\": \"JavaScript\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/voting/{{pollId}}/vote",
+              "host": ["{{baseUrl}}"],
+              "path": ["voting", "{{pollId}}", "vote"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Poll Results",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/voting/{{pollId}}/results",
+              "host": ["{{baseUrl}}"],
+              "path": ["voting", "{{pollId}}", "results"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Check if User Can Vote",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/polls/{{pollId}}/can-vote",
+              "host": ["{{baseUrl}}"],
+              "path": ["polls", "{{pollId}}", "can-vote"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Check if User Has Voted",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/polls/{{pollId}}/has-voted",
+              "host": ["{{baseUrl}}"],
+              "path": ["polls", "{{pollId}}", "has-voted"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User's Vote",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/polls/{{pollId}}/my-vote",
+              "host": ["{{baseUrl}}"],
+              "path": ["polls", "{{pollId}}", "my-vote"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User's Voting History",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/voting/my-votes",
+              "host": ["{{baseUrl}}"],
+              "path": ["voting", "my-votes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Vote",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/voting/{{pollId}}/vote",
+              "host": ["{{baseUrl}}"],
+              "path": ["voting", "{{pollId}}", "vote"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🔐 Private Poll Management (Admin)",
+      "item": [
+        {
+          "name": "Add User to Private Poll",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/polls/{{pollId}}/allowed-users",
+              "host": ["{{baseUrl}}"],
+              "path": ["polls", "{{pollId}}", "allowed-users"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove User from Private Poll",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/polls/{{pollId}}/allowed-users",
+              "host": ["{{baseUrl}}"],
+              "path": ["polls", "{{pollId}}", "allowed-users"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
